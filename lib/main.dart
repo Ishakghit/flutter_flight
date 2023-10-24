@@ -2,19 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: CalendarPage(),
     );
   }
 }
 
 class CalendarPage extends StatefulWidget {
+  const CalendarPage({super.key});
+
   @override
   _CalendarPageState createState() => _CalendarPageState();
 }
@@ -47,13 +51,13 @@ class _CalendarPageState extends State<CalendarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Calendrier de Pilote de Ligne'),
+        title: const Text('Calendrier de Pilote de Ligne'),
       ),
       body: Column(
         children: <Widget>[
           TableCalendar(
             firstDay: DateTime.utc(2023, 1, 1), // Date de début du calendrier
-            lastDay: DateTime.utc(2023, 12, 31), // Date de fin du calendrier
+            lastDay: DateTime.utc(2025, 12, 31), // Date de fin du calendrier
             focusedDay: _selectedDay.value, // Utilisez la date sélectionnée comme date de focus
             selectedDayPredicate: (DateTime day) {
               return isSameDay(_selectedDay.value, day);
@@ -64,7 +68,7 @@ class _CalendarPageState extends State<CalendarPage> {
           ),
           ElevatedButton(
             onPressed: _openAddFlightPage,
-            child: Text('Ajouter un vol'),
+            child: const Text('Ajouter un vol'),
           ),
           Expanded(
             child: ListView.builder(
@@ -96,7 +100,7 @@ class Flight {
 class AddFlightPage extends StatefulWidget {
   final Function(Flight) onAddFlight;
 
-  AddFlightPage({required this.onAddFlight});
+  const AddFlightPage({super.key, required this.onAddFlight});
 
   @override
   _AddFlightPageState createState() => _AddFlightPageState();
@@ -112,7 +116,7 @@ class _AddFlightPageState extends State<AddFlightPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ajouter un Vol'),
+        title: const Text('Ajouter un Vol'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -121,7 +125,7 @@ class _AddFlightPageState extends State<AddFlightPage> {
           child: Column(
             children: <Widget>[
               TextFormField(
-                decoration: InputDecoration(labelText: 'ID du vol'),
+                decoration: const InputDecoration(labelText: 'ID du vol'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Veuillez entrer un ID de vol';
@@ -147,7 +151,7 @@ class _AddFlightPageState extends State<AddFlightPage> {
                     }
                   }
                 },
-                child: Text('Ajouter un vol'),
+                child: const Text('Ajouter un vol'),
               ),
             ],
           ),
@@ -160,13 +164,13 @@ class _AddFlightPageState extends State<AddFlightPage> {
 class FlightDetailsPage extends StatelessWidget {
   final Flight flight;
 
-  FlightDetailsPage({required this.flight});
+  const FlightDetailsPage({super.key, required this.flight});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Détails du Vol'),
+        title: const Text('Détails du Vol'),
       ),
       body: Center(
         child: Column(
